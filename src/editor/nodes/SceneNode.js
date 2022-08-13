@@ -139,6 +139,18 @@ export default class SceneNode extends EditorNodeMixin(Scene) {
         node.mediaConeOuterAngle = props.mediaConeOuterAngle;
         node.mediaConeOuterGain = props.mediaConeOuterGain;
       }
+
+      //mike-frame
+      const farvelFrameComp = json.components.find(c => c.name === "farvel-frame");
+
+      if (farvelFrameComp) {
+        node.farvelFrame = farvelFrameComp.props.farvelFrame;
+        node.defaultEnabled = farvelFrameComp.props.defaultEnabled;
+        node.assetURL = farvelFrameComp.props.assetURL;
+        node.zOffset = farvelFrameComp.props.zOffset;
+        node.scaleSetting = farvelFrameComp.props.scaleSetting;
+      }
+      //mike-frame-end
     }
 
     return node;
@@ -167,6 +179,13 @@ export default class SceneNode extends EditorNodeMixin(Scene) {
     this.mediaConeInnerAngle = MediaAudioDefaults.coneInnerAngle;
     this.mediaConeOuterAngle = MediaAudioDefaults.coneOuterAngle;
     this.mediaConeOuterGain = MediaAudioDefaults.coneOuterGain;
+    //mike-frame
+    this.farvelFrame = false;
+    this.defaultEnabled = true;
+    this.assetURL = "";
+    this.zOffset = -0.008;
+    this.scaleSetting = { x: 3, y: 3, z: 1.5 };
+    //mike-frame-end
     setStaticMode(this, StaticModes.Static);
   }
 
@@ -262,6 +281,14 @@ export default class SceneNode extends EditorNodeMixin(Scene) {
     this.mediaConeOuterAngle = source.mediaConeOuterAngle;
     this.mediaConeOuterGain = source.mediaConeOuterGain;
 
+    //mike-frame
+    this.farvelFrame = source.farvelFrame;
+    this.defaultEnabled = source.defaultEnabled;
+    this.assetURL = source.assetURL;
+    this.zOffset = source.zOffset;
+    this.scaleSetting = source.scaleSetting;
+    //mike-frame-end
+
     return this;
   }
 
@@ -306,6 +333,16 @@ export default class SceneNode extends EditorNodeMixin(Scene) {
                 mediaConeInnerAngle: this.mediaConeInnerAngle,
                 mediaConeOuterAngle: this.mediaConeOuterAngle,
                 mediaConeOuterGain: this.mediaConeOuterGain
+              }
+            },
+            {
+              name: "farvel-frame",
+              props: {
+                farvelFrame: this.farvelFrame,
+                defaultEnabled: this.defaultEnabled,
+                assetURL: this.assetURL,
+                zOffset: this.zOffset,
+                scaleSetting: this.scaleSetting
               }
             },
             {
@@ -411,6 +448,18 @@ export default class SceneNode extends EditorNodeMixin(Scene) {
         ...(mediaConeOuterGain && { mediaConeOuterGain })
       });
     }
+
+    //mike-frame
+    if (this.farvelFrame) {
+      this.addGLTFComponent("farvel-frame", {
+        farvelFrame: this.farvelFrame,
+        defaultEnabled: this.defaultEnabled,
+        assetURL: this.assetURL,
+        zOffset: this.zOffset,
+        scaleSetting: this.scaleSetting
+      });
+    }
+    //mike-frame-end
   }
 
   async combineMeshes() {

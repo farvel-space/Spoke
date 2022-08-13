@@ -13,6 +13,11 @@ import BooleanInput from "../inputs/BooleanInput";
 import { Defaults, DistanceModelOptions, DistanceModelType, SourceType } from "../../editor/objects/AudioParams";
 import useOptionalParam from "./useOptionalParam";
 
+//mike-frame
+import StringInput from "../inputs/StringInput";
+import Vector3Input from "../inputs/Vector3Input";
+//mike-frame-end
+
 const FogTypeOptions = [
   {
     label: "Disabled",
@@ -37,6 +42,14 @@ export default function SceneNodeEditor(props) {
   const onChangeFogNearDistance = useSetPropertySelected(editor, "fogNearDistance");
   const onChangeFogFarDistance = useSetPropertySelected(editor, "fogFarDistance");
   const onChangeFogDensity = useSetPropertySelected(editor, "fogDensity");
+
+  //mike-frame
+  const onChangeFarvelFrame = useSetPropertySelected(editor, "farvelFrame");
+  const onChangeDefaultEnabled = useSetPropertySelected(editor, "defaultEnabled");
+  const onChangeAssetURL = useSetPropertySelected(editor, "assetURL");
+  const onChangeZOffset = useSetPropertySelected(editor, "zOffset");
+  const onChangeScaleSetting = useSetPropertySelected(editor, "scaleSetting");
+  //mike-frame-end
 
   const onChangeOverrideAudioSettings = useSetPropertySelected(editor, "overrideAudioSettings");
   const mediaParamProps = {
@@ -343,6 +356,38 @@ export default function SceneNodeEditor(props) {
               step={0.01}
               value={node.mediaConeOuterGain}
               onChange={mediaParamProps.coneOuterGain.onChange}
+            />
+          </InputGroup>
+        </>
+      )}
+      <InputGroup name="Enable Farvel Frame">
+        <BooleanInput value={node.farvelFrame} onChange={onChangeFarvelFrame} />
+      </InputGroup>
+      {node.farvelFrame && (
+        <>
+          <InputGroup name="Frames Large By Default">
+            <BooleanInput value={node.defaultEnabled} onChange={onChangeDefaultEnabled} />
+          </InputGroup>
+          <InputGroup name="Frame Asset URL">
+            <StringInput id="assetURL" value={node.assetURL} onChange={onChangeAssetURL} />
+          </InputGroup>
+          <NumericInputGroup
+            name="Frame z-axis offest"
+            info="The amount to offset the frame asset from the center of the image."
+            min={0.001}
+            smallStep={0.1}
+            mediumStep={1}
+            largeStep={10}
+            value={node.zOffset}
+            onChange={onChangeZOffset}
+          />
+          <InputGroup name="Asset Scale Settings">
+            <Vector3Input
+              value={node.scaleSetting}
+              smallStep={0.01}
+              mediumStep={0.1}
+              largeStep={1}
+              onChange={onChangeScaleSetting}
             />
           </InputGroup>
         </>
