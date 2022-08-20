@@ -148,7 +148,9 @@ export default class SceneNode extends EditorNodeMixin(Scene) {
         node.defaultEnabled = farvelFrameComp.props.defaultEnabled;
         node.assetURL = farvelFrameComp.props.assetURL;
         node.zOffset = farvelFrameComp.props.zOffset;
-        node.scaleSetting = farvelFrameComp.props.scaleSetting;
+        node.XScale = farvelFrameComp.props.XScale;
+        node.YScale = farvelFrameComp.props.YScale;
+        node.ZScale = farvelFrameComp.props.ZScale;
       }
       //mike-frame-end
     }
@@ -184,7 +186,9 @@ export default class SceneNode extends EditorNodeMixin(Scene) {
     this.defaultEnabled = true;
     this.assetURL = "";
     this.zOffset = -0.008;
-    this.scaleSetting = { x: 3, y: 3, z: 1.5 };
+    this.XScale = 3;
+    this.YScale = 3;
+    this.ZScale = 1.5;
     //mike-frame-end
     setStaticMode(this, StaticModes.Static);
   }
@@ -286,7 +290,9 @@ export default class SceneNode extends EditorNodeMixin(Scene) {
     this.defaultEnabled = source.defaultEnabled;
     this.assetURL = source.assetURL;
     this.zOffset = source.zOffset;
-    this.scaleSetting = source.scaleSetting;
+    this.XScale = source.XScale;
+    this.YScale = source.YScale;
+    this.ZScale = source.ZScale;
     //mike-frame-end
 
     return this;
@@ -342,7 +348,9 @@ export default class SceneNode extends EditorNodeMixin(Scene) {
                 defaultEnabled: this.defaultEnabled,
                 assetURL: this.assetURL,
                 zOffset: this.zOffset,
-                scaleSetting: this.scaleSetting
+                XScale: this.XScale,
+                YScale: this.YScale,
+                ZScale: this.ZScale
               }
             },
             {
@@ -456,7 +464,7 @@ export default class SceneNode extends EditorNodeMixin(Scene) {
         defaultEnabled: this.defaultEnabled,
         assetURL: this.assetURL,
         zOffset: this.zOffset,
-        scaleSetting: this.scaleSetting
+        scaleSetting: { x: this.XScale, y: this.YScale, z: this.ZScale }
       });
     }
     //mike-frame-end

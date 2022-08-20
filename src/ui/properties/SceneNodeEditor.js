@@ -15,7 +15,6 @@ import useOptionalParam from "./useOptionalParam";
 
 //mike-frame
 import StringInput from "../inputs/StringInput";
-import Vector3Input from "../inputs/Vector3Input";
 //mike-frame-end
 
 const FogTypeOptions = [
@@ -48,7 +47,9 @@ export default function SceneNodeEditor(props) {
   const onChangeDefaultEnabled = useSetPropertySelected(editor, "defaultEnabled");
   const onChangeAssetURL = useSetPropertySelected(editor, "assetURL");
   const onChangeZOffset = useSetPropertySelected(editor, "zOffset");
-  const onChangeScaleSetting = useSetPropertySelected(editor, "scaleSetting");
+  const onChangeXScale = useSetPropertySelected(editor, "XScale");
+  const onChangeYScale = useSetPropertySelected(editor, "YScale");
+  const onChangeZScale = useSetPropertySelected(editor, "ZScale");
   //mike-frame-end
 
   const onChangeOverrideAudioSettings = useSetPropertySelected(editor, "overrideAudioSettings");
@@ -365,16 +366,16 @@ export default function SceneNodeEditor(props) {
       </InputGroup>
       {node.farvelFrame && (
         <>
-          <InputGroup name="Frames Large By Default">
+          <InputGroup name="Frames Visible By Default">
             <BooleanInput value={node.defaultEnabled} onChange={onChangeDefaultEnabled} />
           </InputGroup>
           <InputGroup name="Frame Asset URL">
             <StringInput id="assetURL" value={node.assetURL} onChange={onChangeAssetURL} />
           </InputGroup>
           <NumericInputGroup
-            name="Frame z-axis offest"
+            name="Z-axis offset"
             info="The amount to offset the frame asset from the center of the image."
-            min={0.001}
+            min={-999}
             smallStep={0.1}
             mediumStep={1}
             largeStep={10}
@@ -382,12 +383,32 @@ export default function SceneNodeEditor(props) {
             onChange={onChangeZOffset}
           />
           <InputGroup name="Asset Scale Settings">
-            <Vector3Input
-              value={node.scaleSetting}
-              smallStep={0.01}
-              mediumStep={0.1}
-              largeStep={1}
-              onChange={onChangeScaleSetting}
+            <NumericInputGroup
+              name="X"
+              min={-999}
+              smallStep={0.1}
+              mediumStep={1}
+              largeStep={10}
+              value={node.XScale}
+              onChange={onChangeXScale}
+            />
+            <NumericInputGroup
+              name="Y"
+              min={-999}
+              smallStep={0.1}
+              mediumStep={1}
+              largeStep={10}
+              value={node.YScale}
+              onChange={onChangeYScale}
+            />
+            <NumericInputGroup
+              name="Z"
+              min={-999}
+              smallStep={0.1}
+              mediumStep={1}
+              largeStep={10}
+              value={node.ZScale}
+              onChange={onChangeZScale}
             />
           </InputGroup>
         </>
