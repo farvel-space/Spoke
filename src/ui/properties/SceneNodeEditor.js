@@ -376,9 +376,10 @@ export default function SceneNodeEditor(props) {
             name="Z-axis offset"
             info="The amount to offset the frame asset from the center of the image."
             min={-999}
-            smallStep={0.1}
-            mediumStep={1}
-            largeStep={10}
+            smallStep={0.0001}
+            mediumStep={0.01}
+            largeStep={1}
+            displayPrecision={0.0001}
             value={node.zOffset}
             onChange={onChangeZOffset}
           />

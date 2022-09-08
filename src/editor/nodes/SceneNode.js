@@ -185,10 +185,10 @@ export default class SceneNode extends EditorNodeMixin(Scene) {
     this.farvelFrame = false;
     this.defaultEnabled = true;
     this.assetURL = "";
-    this.zOffset = -0.008;
+    this.zOffset = -0.004;
     this.XScale = 3;
     this.YScale = 3;
-    this.ZScale = 1.5;
+    this.ZScale = 3;
     //mike-frame-end
     setStaticMode(this, StaticModes.Static);
   }
